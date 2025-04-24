@@ -28,10 +28,12 @@ object matching_verifier {
       val graph_edges = sc.textFile(args(0)).map(line_to_canonical_edge)
       val graph = Graph.fromEdges(graph_edges, 0, edgeStorageLevel = StorageLevel.MEMORY_AND_DISK, vertexStorageLevel = StorageLevel.MEMORY_AND_DISK)
       val misVertices = CustomLuby.lubyalgo(graph)
+      println(s"DEBUG: misVertices.size = ${misVertices.size}")
       val misBroadcast = sc.broadcast(misVertices)
       val matchingEdges = graph.edges.filter { edge =>
         misBroadcast.value.contains(edge.srcId) && !misBroadcast.value.contains(edge.dstId)
       }
+      println(s"DEBUG: matchingEdges.count = ${matchingEdges.count()}")
       val outputPath = args(0) + "_matching_output"
       matchingEdges
         .map(edge => s"${edge.srcId},${edge.dstId}")
