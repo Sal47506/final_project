@@ -29,8 +29,6 @@ object matching_verifier{
         Edge(x(1).toLong, x(0).toLong, 1)
     }
 
-
-
     val graph_edges = sc.textFile(args(0)).map(line_to_canonical_edge)
     val matched_edges = sc.textFile(args(1)).map(line_to_canonical_edge)
 
