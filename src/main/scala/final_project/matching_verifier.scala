@@ -26,7 +26,8 @@ object matching_verifier {
     if (args.length == 1) {
       // Only graph path provided: generate matching and write to CSV
       val graph_edges = sc.textFile(args(0)).map(line_to_canonical_edge)
-      val graph = Graph.fromEdges(graph_edges, 0, edgeStorageLevel = StorageLevel.MEMORY_AND_DISK, vertexStorageLevel = StorageLevel.MEMORY_AND_DISK)
+      val graphInt = Graph.fromEdges(graph_edges, 0, edgeStorageLevel = StorageLevel.MEMORY_AND_DISK, vertexStorageLevel = StorageLevel.MEMORY_AND_DISK)
+      val graph = graphInt.mapVertices((id, _) => scala.util.Random.nextDouble())
       val misVertices = CustomLuby.lubyalgo(graph)
       println(s"DEBUG: misVertices.size = ${misVertices.size}")
       val misBroadcast = sc.broadcast(misVertices)
