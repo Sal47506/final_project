@@ -1,17 +1,20 @@
 # Large Scale Data Processing: Final Project
 For the final project, you are provided 6 CSV files, each containing an undirected graph, which can be found [here](https://drive.google.com/file/d/1khb-PXodUl82htpyWLMGGNrx-IzC55w8/view?usp=sharing). The files are as follows:  
 
-|           File name           |        Number of edges       |
-| ------------------------------| ---------------------------- |
-| com-orkut.ungraph.csv         | 117185083                    |
-| twitter_original_edges.csv    | 63555749                     |
-| soc-LiveJournal1.csv          | 42851237                     |
-| soc-pokec-relationships.csv   | 22301964                     |
-| musae_ENGB_edges.csv          | 35324                        |
-| log_normal_100.csv            | 2671                         |  
+| File name                   | Number of edges | Matching size |
+|------------------------------|-----------------|---------------|
+| com-orkut.ungraph.csv        | 117,185,083      |               |
+| twitter_original_edges.csv   | 63,555,749       |               |
+| soc-LiveJournal1.csv         | 42,851,237       |               |
+| soc-pokec-relationships.csv  | 22,301,964       |               |
+| musae_ENGB_edges.csv         | 35,324           | 2253              |
+| log_normal_100.csv           | 2,671            | 48              |
 
 
 You can choose to work on **matching** or **correlation clustering**. 
+
+
+Algorithm: Bipartite Greedy matching using canonical edges (smaller vertices come first in priority)
 
 ## Matching
 
