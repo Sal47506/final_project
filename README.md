@@ -4,9 +4,9 @@ For the final project, you are provided 6 CSV files, each containing an undirect
 | File name                   | Number of edges | Matching size |
 |------------------------------|-----------------|---------------|
 | com-orkut.ungraph.csv        | 117,185,083      |               |
-| twitter_original_edges.csv   | 63,555,749       |               |
-| soc-LiveJournal1.csv         | 42,851,237       |               |
-| soc-pokec-relationships.csv  | 22,301,964       |               |
+| twitter_original_edges.csv   | 63,555,749       |   92018            |
+| soc-LiveJournal1.csv         | 42,851,237       |  1546942             |
+| soc-pokec-relationships.csv  | 22,301,964       | 589590         |
 | musae_ENGB_edges.csv         | 35,324           | 2253              |
 | log_normal_100.csv           | 2,671            | 48              |
 
