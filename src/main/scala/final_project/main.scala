@@ -35,8 +35,13 @@ object main {
     }
 
     if (args(0) == "compute") {
-      // Usage: main compute graph_path output_path
-      // This will output a directory with a CSV file of matching edges (srcId,dstId)
+      // Usage: main compute graph_path output_path algorithm={lubyalgo,randomgreedymis}
+      if (args.length < 4) {
+        println("Usage: main compute graph_path output_path algorithm={lubyalgo,randomgreedymis}")
+        sys.exit(1)
+      }
+
+      val algorithm = args(3).toLowerCase // Extract the algorithm parameter
       val startTimeMillis = System.currentTimeMillis()
       val graph_edges = sc.textFile(args(1)).map(line_to_canonical_edge)
 
@@ -59,7 +64,25 @@ object main {
         println(s"DEBUG: Processing subgraph ($p1,$p2) with ${edgeSeq.size} edges")
         val subGraphInt = Graph.fromEdges(sc.parallelize(edgeSeq), 0)
         val subGraph = subGraphInt.mapVertices((id, _) => scala.util.Random.nextDouble())
-        val selectedSources = CustomLuby.lubyalgo(subGraph)
+        val selectedSources = algorithm match {
+          case "lubyalgo" =>
+            println("DEBUG: Running lubyalgo...")
+            val start = System.currentTimeMillis()
+            val result = CustomLuby.lubyalgo(subGraph)
+            val duration = (System.currentTimeMillis() - start) / 1000.0
+            println(f"DEBUG: lubyalgo completed in $duration%.2f seconds.")
+            result
+          case "alonitai" =>
+            println("DEBUG: Running alonItaiMIS...")
+            val start = System.currentTimeMillis()
+            val result = CustomLuby.alonItaiMIS(subGraph)
+            val duration = (System.currentTimeMillis() - start) / 1000.0
+            println(f"DEBUG: alonItaiMIS completed in $duration%.2f seconds.")
+            result
+          case _ =>
+            println(s"ERROR: Unknown algorithm '$algorithm'. Use 'lubyalgo' or 'alonitai'.")
+            sys.exit(1)
+        }
         println(s"DEBUG: Found ${selectedSources.size} selected source vertices")
         
         // Only keep edges where source is selected
