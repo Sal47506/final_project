@@ -130,21 +130,4 @@ object GraphAlgorithms {
     println(s"DEBUG: greedyMIS returning MIS size: ${MIS.size}")
     MIS
   }
-
-  private def sparsifiedMISAlgorithm(graph: Graph[Double, Int]): Set[VertexId] = {
-    val delta = graph.degrees.map(_._2).reduce(math.max)
-    val rounds = math.log(math.log(delta)).toInt.max(1)
-
-    var g = graph.mapVertices((_, _) => Random.nextDouble())
-    var MIS = Set[VertexId]()
-
-    for (_ <- 1 to rounds) {
-      val selected = g.vertices.filter(_._2 < 0.5).map(_._1).collect().toSet
-      MIS ++= selected
-      g = g.subgraph(vpred = (id, _) => !selected.contains(id))
-        .cache()
-    }
-
-    MIS
-  }
 }
