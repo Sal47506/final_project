@@ -13,11 +13,22 @@ For the final project, you are provided 6 CSV files, each containing an undirect
 
 
 
-You can choose to work on **matching** or **correlation clustering**. 
-
-
 Algorithm 1: Bipartite Greedy matching (smaller vertices come first in priority)
 Algorithm 2: Alon-Babai-Itai MIS Algorithm (Paper here: https://web.math.princeton.edu/~nalon/PDFS/Publications2/A%20fast%20and%20simple%20randomized%20parallel%20algorithm%20for%20the%20maximal%20independent%20set%20problem.pdf)
+
+
+### Matching Instructions
+
+To run either algorithms do:
+```
+// Unix (Bipartite)
+spark-submit --master "local[*]" --class "final_project.main" target/scala-2.12/project_3_2.12-1.0.jar compute data/log_normal_100.csv output_dir lubyalgo
+
+// Unix (Alon-Itai)
+spark-submit --master "local[*]" --class "final_project.main" target/scala-2.12/project_3_2.12-1.0.jar compute data/log_normal_100.csv output_dir lubyalgo
+
+// Unix
+spark-submit --master "local[*]" --class "final_project.matching_verifier" target/scala-2.12/project_3_2.12-1.0.jar data/log_normal_100.csv output_dir/part-00000
 
 ## Matching
 
