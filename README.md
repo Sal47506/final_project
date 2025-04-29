@@ -1,20 +1,35 @@
 # Large Scale Data Processing: Final Project
 For the final project, you are provided 6 CSV files, each containing an undirected graph, which can be found [here](https://drive.google.com/file/d/1khb-PXodUl82htpyWLMGGNrx-IzC55w8/view?usp=sharing). The files are as follows:  
 
-| File name                   | Number of edges | Matching size |
-|------------------------------|-----------------|---------------|
-| com-orkut.ungraph.csv        | 117,185,083      |               |
-| twitter_original_edges.csv   | 63,555,749       |   92018            |
-| soc-LiveJournal1.csv         | 42,851,237       |  1546942             |
-| soc-pokec-relationships.csv  | 22,301,964       | 589590         |
-| musae_ENGB_edges.csv         | 35,324           | 2253              |
-| log_normal_100.csv           | 2,671            | 48              |
+| File name                   | Number of edges | Matching size (Bipartite-Algo)       | Matching size (Alon-Itai)         |
+|------------------------------|-----------------|--------------------------------------|-----------------------------------|
+| com-orkut.ungraph.csv        | 117,185,083      |                                      | 1,376,710 (927 seconds)           |
+| twitter_original_edges.csv   | 63,555,749       | 92,018                               |                                   |
+| soc-LiveJournal1.csv         | 42,851,237       | 1,546,942                            |                                   |
+| soc-pokec-relationships.csv  | 22,301,964       | 589,590                              |                                   |
+| musae_ENGB_edges.csv         | 35,324           | 2,253 (5 seconds)                    | 2,392 (11 seconds)                |
+| log_normal_100.csv           | 2,671            | 48 (5 seconds)                       | 49 (10 seconds)                   |
 
 
-You can choose to work on **matching** or **correlation clustering**. 
 
 
-Algorithm: Bipartite Greedy matching using canonical edges (smaller vertices come first in priority)
+Algorithm 1: Bipartite Greedy matching (smaller vertices come first in priority)
+Algorithm 2: Alon-Babai-Itai MIS Algorithm (Paper here: https://web.math.princeton.edu/~nalon/PDFS/Publications2/A%20fast%20and%20simple%20randomized%20parallel%20algorithm%20for%20the%20maximal%20independent%20set%20problem.pdf)
+
+
+### Matching Instructions
+
+To run either algorithms do:
+```
+// Unix (Bipartite)
+spark-submit --master "local[*]" --class "final_project.main" target/scala-2.12/project_3_2.12-1.0.jar compute data/log_normal_100.csv output_dir lubyalgo
+
+// Unix (Alon-Itai)
+spark-submit --master "local[*]" --class "final_project.main" target/scala-2.12/project_3_2.12-1.0.jar compute data/log_normal_100.csv output_dir alonitai
+
+// Unix
+spark-submit --master "local[*]" --class "final_project.matching_verifier" target/scala-2.12/project_3_2.12-1.0.jar data/log_normal_100.csv output_dir/part-00000
+```
 
 ## Matching
 
