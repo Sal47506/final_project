@@ -19,7 +19,7 @@ object main {
 
   def main(args: Array[String]) {
     if (args.length < 4) {
-      println("Usage: main compute graph_path output_path algorithm={lubyalgo,alonitai}")
+      println("Usage: main compute graph_path output_path algorithm={bipartitealgo,alonitai}")
       sys.exit(1)
     }
 
@@ -50,14 +50,14 @@ object main {
       val subGraphInt = Graph.fromEdges(sc.parallelize(edgeSeq), 0)
       val subGraph = subGraphInt.mapVertices((id, _) => scala.util.Random.nextDouble())
       val selectedSources = algorithm match {
-        case "lubyalgo" =>
-          println("DEBUG: Running lubyalgo...")
-          CustomLuby.lubyalgo(subGraph)
+        case "bipartitealgo" =>
+          println("DEBUG: Running bipartiteAlgo...")
+          GraphAlgorithms.bipartiteAlgo(subGraph)
         case "alonitai" =>
           println("DEBUG: Running alonItaiMIS...")
-          CustomLuby.alonItaiMIS(subGraph)
+          GraphAlgorithms.alonItaiMIS(subGraph)
         case _ =>
-          println(s"ERROR: Unknown algorithm '$algorithm'. Use 'lubyalgo' or 'alonitai'.")
+          println(s"ERROR: Unknown algorithm '$algorithm'. Use 'bipartitealgo' or 'alonitai'.")
           sys.exit(1)
       }
       println(s"DEBUG: Found ${selectedSources.size} selected source vertices")

@@ -7,7 +7,7 @@ package:
     sbt package
 
 # Run the main class with Spark
-run-main algorithm={lubyalgo,alonitai}:
+run-main algorithm={bipartitealgo,alonitai}:
     spark-submit --master "local[*]" --class "final_project.main" target/scala-2.12/project_3_2.12-1.0.jar compute data/log_normal_100.csv output_dir {{algorithm}}
 
 # Verify the matching

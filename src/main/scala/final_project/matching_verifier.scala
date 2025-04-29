@@ -1,10 +1,8 @@
 package final_project
 
 import org.apache.spark.sql.SparkSession
-import org.apache.spark.sql.functions._
 import org.apache.spark.SparkContext
 import org.apache.spark.SparkConf
-import org.apache.spark.rdd.RDD
 import org.apache.spark.graphx._
 import org.apache.spark.storage.StorageLevel
 
@@ -28,7 +26,7 @@ object matching_verifier {
       val graph_edges = sc.textFile(args(0)).map(line_to_canonical_edge)
       val graphInt = Graph.fromEdges(graph_edges, 0, edgeStorageLevel = StorageLevel.MEMORY_AND_DISK, vertexStorageLevel = StorageLevel.MEMORY_AND_DISK)
       val graph = graphInt.mapVertices((id, _) => scala.util.Random.nextDouble())
-      val misVertices = CustomLuby.lubyalgo(graph)
+      val misVertices = GraphAlgorithms.bipartiteAlgo(graph) // Updated reference
       println(s"DEBUG: misVertices.size = ${misVertices.size}")
       val misBroadcast = sc.broadcast(misVertices)
       val matchingEdges = graph.edges.filter { edge =>

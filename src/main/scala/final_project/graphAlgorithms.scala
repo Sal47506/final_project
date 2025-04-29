@@ -3,8 +3,8 @@ package final_project
 import org.apache.spark.graphx._
 import scala.util.Random
 
-object CustomLuby {
-  def lubyalgo(graph: Graph[Double, Int], selectProb: Double = 1.0): Set[VertexId] = {
+object GraphAlgorithms {
+  def bipartiteAlgo(graph: Graph[Double, Int], selectProb: Double = 1.0): Set[VertexId] = {
     // Get edges and vertices with weights
     val edges = graph.edges.collect()
     val vertices = graph.vertices.collect().toMap
@@ -27,7 +27,6 @@ object CustomLuby {
     
     matching
   }
-
 
   def alonItaiMIS(graph: Graph[Double, Int]): Set[VertexId] = {
     var g = graph
