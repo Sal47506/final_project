@@ -28,6 +28,7 @@ object CustomLuby {
     matching
   }
 
+
   def alonItaiMIS(graph: Graph[Double, Int]): Set[VertexId] = {
     var g = graph
     var MIS = Set[VertexId]()
