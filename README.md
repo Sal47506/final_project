@@ -29,11 +29,9 @@ If we were given a new test, we would probably run Alon-Itai, even if bipartite 
 
 To address this issue, we implemented Alon-Itai, which does not suffer from the same memory limitations. Both algorithms are very scalable in terms of time, as we make use of the Graph data structure and RDDs. Bipartite is faster, but AIB is more powerful, scalable, and accurate. AIB can work on any graph, even if it is cyclical or irregular, making it more versatile. It also uses randomization and local degree information, whereas bipartite does not. This allows AIB to find larger matchings and makes it more robust to variations in graph structure.
 
-The only advantage of bipartite is its speed on smaller graphs. However, it fails to complete execution on very large graphs due to memory constraints. For massive graphs, we experienced Spark failures due to memory exhaustion and unbalanced partitions. AIB, on the other hand, streams most of the computation through graph operations and message passing, which results in a more stable memory profile across iterations—even though it takes slightly longer to run.
+The only advantage of bipartite is its speed on smaller graphs. However, it fails to complete execution on very large graphs due to memory constraints. For massive graphs, we experienced Spark failures due to memory exhaustion and unbalanced partitions. AIB, on the other hand, streams most of the computation through graph operations and message passing, which results in a more stable memory profile across iterations—even though it takes slightly longer to run. As for the number of iterations, bipartite completes in one pass, while AIB takes `log(E)` iterations, where `E` is the number of edges.
 
-As for the number of iterations, bipartite completes in one pass, while AIB takes `log(E)` iterations, where `E` is the number of edges.
-
-
+Our implementation for the AIB algorithm does have some novel and original ideas. In the AIB paper, the authors originally intended for it to be used for finding an MIS. We were able to tweak it to find a matching, something which has never been done before.
 ### Matching Instructions
 
 To run either algorithms do:
