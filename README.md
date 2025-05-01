@@ -14,6 +14,7 @@ For the final project, you are provided 6 CSV files, each containing an undirect
 
 
 Algorithm 1: Bipartite Greedy matching (smaller vertices come first in priority)
+
 Algorithm 2: Alon-Babai-Itai MIS Algorithm (Paper here: https://web.math.princeton.edu/~nalon/PDFS/Publications2/A%20fast%20and%20simple%20randomized%20parallel%20algorithm%20for%20the%20maximal%20independent%20set%20problem.pdf)
 
 
