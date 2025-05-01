@@ -5,7 +5,7 @@ For the final project, you are provided 6 CSV files, each containing an undirect
 |------------------------------|-----------------|--------------------------------------|-----------------------------------|
 | com-orkut.ungraph.csv        | 117,185,083      |                                      | 1,376,710 (927 seconds)           |
 | twitter_original_edges.csv   | 63,555,749       | 92,018 (426 seconds)                              |                                   |
-| soc-LiveJournal1.csv         | 42,851,237       | 1,546,942  (411 seconds)                          |                                   |
+| soc-LiveJournal1.csv         | 42,851,237       | 1,546,942  (411 seconds)                          |   1,657,749 (554 seconds)                                |
 | soc-pokec-relationships.csv  | 22,301,964       | 589,590 (233 seconds)                             |                                   |
 | musae_ENGB_edges.csv         | 35,324           | 2,253 (5 seconds)                    | 2,392 (11 seconds)                |
 | log_normal_100.csv           | 2,671            | 48 (5 seconds)                       | 49 (10 seconds)                   |
