@@ -32,6 +32,10 @@ To address this issue, we implemented Alon-Itai, which does not suffer from the 
 The only advantage of bipartite is its speed on smaller graphs. However, it fails to complete execution on very large graphs due to memory constraints. For massive graphs, we experienced Spark failures due to memory exhaustion and unbalanced partitions. AIB, on the other hand, streams most of the computation through graph operations and message passing, which results in a more stable memory profile across iterations—even though it takes slightly longer to run. As for the number of iterations, bipartite completes in one pass, while AIB takes `log(E)` iterations, where `E` is the number of edges.
 
 Our implementation for the AIB algorithm does have some novel and original ideas. In the AIB paper, the authors originally intended for it to be used for finding an MIS. We were able to tweak it to find a matching, something which has never been done before.
+
+The bipartite greedy matching algorithm has a proven **1/2-approximation guarantee**. This means the size of the matching it produces is always at least half that of the optimal matching. You can find a proof of this guarantee [here](https://bowaggoner.com/courses/gradalg/notes/lect06-approx.pdf?utm_source=chatgpt.com).As for the Alon-Babai-Itai (AIB) algorithm, the original authors did not provide a formal approximation guarantee. However, based on our testing, it consistently outperforms the bipartite greedy approach in both size and quality of matchings. This suggests that its approximation ratio is likely better than 1/2 in practice, even if not yet theoretically proven.
+
+
 ### Matching Instructions
 
 To run either algorithms do:
