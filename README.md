@@ -17,6 +17,22 @@ Algorithm 1: Bipartite Greedy matching (smaller vertices come first in priority)
 
 Algorithm 2: Alon-Babai-Itai MIS Algorithm (Paper here: https://web.math.princeton.edu/~nalon/PDFS/Publications2/A%20fast%20and%20simple%20randomized%20parallel%20algorithm%20for%20the%20maximal%20independent%20set%20problem.pdf)
 
+### Writeup/Report
+
+We used two approaches for obtaining the matchings: **bipartite greedy matching** and the **Alon-Babai-Itai MIS algorithm**.
+
+The bipartite matching algorithm focuses on finding a matching in a bipartite graph using a greedy approach. It begins by collecting all edges and vertices, then sorting the edges based on the weight of the source vertices. It iterates through the sorted edges and adds an edge to the matching set only if neither of its endpoints (source or destination vertices) are already matched. This ensures that each vertex is used at most once in the matching. The algorithm is efficient and straightforward, making it suitable for scenarios where finding a quick approximate matching is desirable.
+
+The Alon-Itai algorithm iteratively computes a Maximal Independent Set (MIS) for a graph. In each iteration, it selects an independent set of vertices (a set of vertices where no two are adjacent), adds it to the MIS, and removes these vertices along with their neighbors from the graph. The process repeats until the graph is empty. A key optimization within the algorithm is the `inPhaseOptimized` function, which marks vertices probabilistically based on their degree and resolves conflicts to ensure a valid independent set. This algorithm is effective for problems requiring independent sets and is particularly useful for distributed or parallel computing needs.
+
+If we were given a new test, we would probably run Alon-Itai, even if bipartite is slightly faster for smaller cases. While both algorithms are parallelizable and would work perfectly fine for most test cases, space begins to become a problem for bipartite when the input size gets extremely large. This is due to Scala’s lack of effective garbage collection, which can result in bipartite functions like `collect` and heap operations leading to heap space exhaustion—a problem we actually encountered.
+
+To address this issue, we implemented Alon-Itai, which does not suffer from the same memory limitations. Both algorithms are very scalable in terms of time, as we make use of the Graph data structure and RDDs. Bipartite is faster, but AIB is more powerful, scalable, and accurate. AIB can work on any graph, even if it is cyclical or irregular, making it more versatile. It also uses randomization and local degree information, whereas bipartite does not. This allows AIB to find larger matchings and makes it more robust to variations in graph structure.
+
+The only advantage of bipartite is its speed on smaller graphs. However, it fails to complete execution on very large graphs due to memory constraints. For massive graphs, we experienced Spark failures due to memory exhaustion and unbalanced partitions. AIB, on the other hand, streams most of the computation through graph operations and message passing, which results in a more stable memory profile across iterations—even though it takes slightly longer to run.
+
+As for the number of iterations, bipartite completes in one pass, while AIB takes `log(E)` iterations, where `E` is the number of edges.
+
 
 ### Matching Instructions
 
