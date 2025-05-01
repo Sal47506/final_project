@@ -10,7 +10,9 @@ For the final project, you are provided 6 CSV files, each containing an undirect
 | musae_ENGB_edges.csv         | 35,324           | 2,253 (5 seconds)                    | 2,392 (11 seconds)                |
 | log_normal_100.csv           | 2,671            | 48 (5 seconds)                       | 49 (10 seconds)                   |
 
+The specifications of the local machine used for testing can be found in the image below:
 
+![Local Machine Specs](machine.png)
 
 
 Algorithm 1: Bipartite Greedy matching (smaller vertices come first in priority)
