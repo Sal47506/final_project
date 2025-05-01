@@ -10,6 +10,12 @@ For the final project, you are provided 6 CSV files, each containing an undirect
 | musae_ENGB_edges.csv         | 35,324           | 2,253 (5 seconds)                    | 2,392 (11 seconds)                |
 | log_normal_100.csv           | 2,671            | 48 (5 seconds)                       | 49 (10 seconds)                   |
 
+
+- **Largest file**: Processed on Google Cloud Platform using a `2x4 N2` machine for both the master and worker nodes.
+- **Smallest two files**: Ran locally on the developer's machine.
+- **Other files**: Processed on GCP with `2x4 N1` machines for both the master and worker nodes.
+
+
 The specifications of the local machine used for testing can be found in the image below:
 
 ![Local Machine Specs](machine.png)
